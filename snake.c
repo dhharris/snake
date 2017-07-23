@@ -1,4 +1,4 @@
-/* 
+/*
   SNAKE
 
   My first video game
@@ -7,7 +7,7 @@
   Written by Hugh Harris
 */
 
-/* 
+/*
   Snake.c
   Handles the game logic and main function.
 */
@@ -48,7 +48,7 @@ int checkCollisions(Snake *snake, char arena[][xmax]) {
 		case ' ': break;
 		case '-': return 1;
 		case '|': return 1;
-		case 'o': 
+		case 'o':
 			snake->score++;
 			snake->length++;
 			break;
@@ -113,10 +113,18 @@ void moveHead(Snake *snake) {
 int input(void) {
 	int ch=getch();
 	switch(ch) {
-		case KEY_UP: return 1;
-		case KEY_DOWN: return 2;
-		case KEY_RIGHT: return 3;
-		case KEY_LEFT: return 4;
+		case KEY_UP:
+                case 'k':
+                        return 1;
+		case KEY_DOWN:
+                case 'j':
+                        return 2;
+		case KEY_RIGHT:
+                case 'l':
+                        return 3;
+		case KEY_LEFT:
+                case 'h':
+                        return 4;
 		case '\n': return 0; /* Pause button */
 	}
 return -1; /* If no input */
@@ -136,7 +144,7 @@ int tick(Snake *snake, char arena[][xmax]) {
 	}
 	if ((d != -1) && (d != opposite(snake->direction)))
 		snake->direction=d;
-	
+
 
 	moveHead(snake);
 
@@ -149,11 +157,11 @@ int tick(Snake *snake, char arena[][xmax]) {
 
 
 int main(void) {
-	int status; /* Value returned by tick 
-				1: Game running 
-				0: Game paused 
+	int status; /* Value returned by tick
+				1: Game running
+				0: Game paused
 				-1: Game over */
-				
+
 	int delta=0; /* Reduces delay */
 
 	system("clear");
@@ -163,7 +171,7 @@ int main(void) {
 
 	/* Initialize curses window */
 	WINDOW *win=initscr(); /* Initialize game window */
-    /*Sets the terminal so that it reads characters from keyboard 
+    /*Sets the terminal so that it reads characters from keyboard
 	immediately as they are typed, without waiting for carriage return.*/
 	noecho(); /* don't echo any keypresses */
 	curs_set(FALSE); /* Don't display a cursor */
@@ -202,7 +210,7 @@ int main(void) {
 		delta=snake.score * DELAYMULTIPLIER;
 		if (DELAY-delta > 0)
 			usleep(DELAY-delta);
-		
+
 
 
 	}
