@@ -17,8 +17,8 @@ void initScores(void) {
 	freopen(".names.txt","r+",fptr1);
 }
 
-int compare(Highscore *ptr1, Highscore *ptr2) {
-	return ptr2->score-ptr1->score;
+int compare(const void *ptr1, const void *ptr2) {
+	return ((Highscore*) ptr2)->score-((Highscore*) ptr1)->score;
 }
 
 void sortScores(Highscore highscores[], int count) {
@@ -68,7 +68,7 @@ int getScores(Highscore highscores[]) {
 	}
 	while (EOF != fscanf(fptr, "%i ",&highscores[count1].score))
 		count1++;
-	
+
 	while (EOF != fscanf(fptr1, "%s",highscores[count2].name))
 		count2++;
 
@@ -165,5 +165,5 @@ void outputMain(Snake *snake) {
 	fclose(fptr);
 	fclose(fptr1);
 	return;
-	
+
 }
